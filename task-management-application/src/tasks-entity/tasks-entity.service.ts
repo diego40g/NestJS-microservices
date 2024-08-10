@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/request/create-task.dto';
 import { TasksRepository } from './tasks.repository';
+import { TaskStatus } from './task-status.enum';
 
 @Injectable()
 export class TasksEntityService {
@@ -40,5 +41,14 @@ export class TasksEntityService {
     if ((await result).affected === 0) {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
+  }
+
+  async updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
+    const task = await this.getTaskById(id);
+
+    task.status = status;
+    await this.tasksRepository.save(task);
+
+    return task;
   }
 }
