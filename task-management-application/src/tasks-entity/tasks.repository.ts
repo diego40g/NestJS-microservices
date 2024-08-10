@@ -1,4 +1,4 @@
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, DeleteResult, Repository } from 'typeorm';
 import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enum';
 import { CreateTaskDto } from './dto/request/create-task.dto';
@@ -20,5 +20,9 @@ export class TasksRepository extends Repository<Task> {
 
     await this.save(task);
     return task;
+  }
+
+  async deleteTask(id: string): Promise<DeleteResult> {
+    return await this.delete(id); //DeleteResult { raw: [], affected: 0 }
   }
 }

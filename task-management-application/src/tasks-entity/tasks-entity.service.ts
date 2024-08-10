@@ -34,4 +34,11 @@ export class TasksEntityService {
     await this.tasksRepository.save(task);
     return task;*/
   }
+
+  async deleteTask(id: string): Promise<void> {
+    const result = this.tasksRepository.deleteTask(id);
+    if ((await result).affected === 0) {
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
+  }
 }
