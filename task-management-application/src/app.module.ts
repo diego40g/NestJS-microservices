@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TaskEntityModule } from './task-entity/task-entity.module';
+import { TasksEntityModule } from './tasks-entity/tasks-entity.module';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { TaskEntityModule } from './task-entity/task-entity.module';
         synchronize: true,
       }),
     }),
-    TaskEntityModule,
+    TasksEntityModule,
   ],
 })
 export class AppModule {}
